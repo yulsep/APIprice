@@ -19,7 +19,7 @@ def get_course_price():
     if price_element:
         return jsonify({'url': url, 'price': price_element.text.strip()})
     else:
-        return jsonify({'url': url, 'price': 'No se encontró información de precio.'})
+        return jsonify({'url': url, 'price': 'No price information found.'})
 
 
 if __name__ == '__main__':
