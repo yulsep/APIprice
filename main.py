@@ -21,6 +21,11 @@ def get_course_price():
         return jsonify({'url': url, 'price': 'No price information found.'})
 
 
+@app.route("/api/price", methods=['OPTIONS'])
+def get_course_options():
+    return {'status': 200}
+
+
 if __name__ == '__main__':
     app.run()
 
