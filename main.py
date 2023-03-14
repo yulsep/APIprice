@@ -4,7 +4,7 @@ import requests
 from bs4 import BeautifulSoup
 
 app = Flask(__name__)
-CORS(app, resources={r"/*": {"origins": "*"}})
+CORS(app, origins=['https://127.0.0.1:5500'])
 
 
 @app.route("/api/price", methods=['POST'])
