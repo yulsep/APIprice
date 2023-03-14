@@ -2,15 +2,16 @@ from flask import Flask, jsonify, request
 from flask_cors import CORS
 import requests
 from bs4 import BeautifulSoup
+from flask_cors import cross_origin
 
 app = Flask(__name__)
 CORS(app, origins='*')
 
 
-@app.route("/api/price", methods=['POST'])
+@app.route('/course_price', methods=['POST'])
+@cross_origin()
 def get_course_price():
-    data = request.get_json()
-    url = data['url']
+    url = request.json['url']
     r = requests.get(url)
     html = r.text
     doc = BeautifulSoup(html, 'html.parser')
@@ -18,12 +19,7 @@ def get_course_price():
     if price_element:
         return jsonify({'url': url, 'price': price_element.text.strip()})
     else:
-        return jsonify({'url': url, 'price': 'No price information found.'})
-
-
-@app.route("/api/price", methods=['OPTIONS'])
-def get_course_options():
-    return {'status': 200}
+        return jsonify({'url': url, 'price': 'No se encontró información de precio.'})
 
 
 if __name__ == '__main__':
